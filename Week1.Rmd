@@ -1,0 +1,164 @@
+---
+title: "Landscape Genetics Week 1 R homework"
+author: "Erika"
+date: "1/21/2020"
+output: html_document
+---
+
+This is the .Rmd file in which I am doing the Landscape Genetics assignments for week 1. All of them require use of the LandGenCourse package
+
+```{r}
+require(LandGenCourse)
+```
+Now activate swirl for the lessons
+```{r}
+require(swirl)
+swirl()
+```
+
+Watching a video from week 0: Introduction to RNotebooks
+
+Continuing where I left off on the tutorial for brining genetic data into R.
+
+
+```{r}
+rm(list = ls())
+```
+Don't try to run swirl from within the .Rmd.  Stalls.
+
+Now I'm going over some of the worked examples and am going to type some of the code just to help it sink in.  The first example, Week 0: Intro to R programming, is basically review.  But what the heck.  Here's some code from it:
+
+Random numbers and distributions
+
+Examine the `rnorm()`,  `rpois()` and `rchisq()` functions:
+
+Ten random numbers from a normal distribution:
+```{r}
+rnorm(10)
+```
+Ten random numbers from a normal distribution with designated mean and standard deviation:
+```{r}
+rnorm(10, mean = 35, sd = 4)
+```
+Now into new territory: A poisson distribution with designated mean
+```{r}
+rpois(10,lambda = 2)
+```
+And the Chi-square distribution with 1 degree of freedom:
+```{r}
+rchisq(10, df = 1)
+```
+Coercing variables to numeric:
+Start with data that are defined as a set of characters:
+```{r}
+x <- c("42", "99")
+```
+And now coerce to numeric
+```{r}
+y <- as.numeric(x)
+```
+Some details on character variables:
+Create a chr variable and check how many characters it has:
+```{r}
+Erika <-"Erika L. Barthelmess"
+nchar(Erika)
+```
+```{r}
+nchar(" \t ")
+```
+Concatenation of characters:
+make some character vars:
+```{r}
+a<-"Erika"
+b<-"loves"
+c<-"labs!"
+#put them into one variable
+terms<-c(a,b,c)
+terms
+```
+Now make terms into a single entity with `paste()`:
+```{r}
+paste(terms, collapse = " ")
+```
+```{r}
+paste(a,b)
+```
+```{r}
+paste(a,b, sep = " really ")
+```
+Logical types:
+```{r}
+canThrow<-c(FALSE,TRUE, TRUE, FALSE, FALSE)
+canThrow
+```
+We can implement logical conditions on variables, as well:
+```{r}
+stable<-c("GRIII" == 0, nchar("Marshawn")==8)
+stable
+```
+We often use logical types to serve as indices for vectors.  For instance:
+```{r}
+data<-rnorm(20)
+data
+```
+What if you wanted just the non-negative values of data?
+```{r}
+data[data >0]
+```
+Let's look at the modulus operator which provides the remainder of a division:
+```{r}
+1:20 %% 2
+```
+##Data Containers
+###Vectors
+You cannot mix data types in a vector.
+
+```{r}
+x<-c(1,2,3)
+x
+```
+
+```{r}
+y<-c(TRUE, TRUE, FALSE)
+y
+```
+```{r}
+z<-c("I", "am", "not", "a", "looser")
+z
+```
+All of these were acceptable vectors.
+If you try to mix data types, all will be coerced to character:
+```{r}
+w<-c(TRUE, "1", pi, ls())
+w
+```
+```{r}
+class(w)
+```
+We access elements of a vector with the `[ ]` notation.
+```{r}
+x
+```
+```{r}
+x[1]<-3
+x[2]<-1
+x[3]<-2
+x
+
+```
+###Matrices
+Create an empty matrix:
+```{r}
+matrix(nrow=2, ncol = 2)
+```
+Or prepopulate one with values:
+```{r}
+matrix(1:4, nrow=2)
+```
+We can use some other functions to help create numerical matrices:
+```{r}
+indices<-cbind(rep(1:2, each = 3), rep(1:3, times = 2), rep(5, length.out = 6))
+indices
+```
+###Lists
+
